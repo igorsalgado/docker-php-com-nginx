@@ -33,7 +33,7 @@ RUN docker-php-ext-install zip iconv simplexml pcntl gd fileinfo
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 COPY ./docker/supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY ./docker/supervisord/conf /etc/supervisord.d/
+COPY ./docker/supervisord/supervisord.conf /etc/supervisord.d
 ### Supervisor permite monitorar e controlar vários processos (LINUX)
 ### Bastante utilizado para manter processos em Daemon, ou seja, executando em segundo plano
 
