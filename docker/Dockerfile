@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     libxml2-dev
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql pdo_pgsql pgsql session xml
+RUN docker-php-ext-install mysqli pdo pdo_mysql session xml
 
 # habilita instalação do Redis
 RUN pecl install redis-${REDIS_LIB_VERSION} \
@@ -34,6 +34,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 COPY ./docker/supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY ./docker/supervisord/supervisord.conf /etc/supervisord.d
+
 ### Supervisor permite monitorar e controlar vários processos (LINUX)
 ### Bastante utilizado para manter processos em Daemon, ou seja, executando em segundo plano
 
