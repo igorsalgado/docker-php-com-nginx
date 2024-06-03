@@ -1,14 +1,25 @@
 services:
-  web:
-    image: urnau/app1-php:prod-nginx-php-fpm8.2.3
-    container_name: web
+  app:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
       args:
         PHP_VERSION: '8.1.17-fpm-bullseye'
-    # volumes:
-    #   - ./app:/var/www/app
     ports:
-      - "80:80" #http
-      - "443:443" #https
+      - "80:80" # HTTP
+      - "443:443" # HTTPS
+    environment:
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: laravel
+      DB_USERNAME: laravel
+      DB_PASSWORD: secret
+
+  db:
+    image: postgres:latest
+    container_name: db
+    environment:
+      POSTGRES_DB: laravel
+      POSTGRES_USER: laravel
+      POSTGRES_PASSWORD: secret
